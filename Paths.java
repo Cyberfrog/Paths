@@ -37,8 +37,6 @@ public class Paths{
 	public static boolean isPath(String source,String destination){ 
 		return roots.get(source).contains(destination);
 	}
-
-
 	public static void main(String a[]){
 		String source = a[0];
 		String destination = a[1];
@@ -50,7 +48,6 @@ public class Paths{
 			System.out.println("No city named \""+destination+"\" in database");
 			return;
 		}
-		// System.out.println(isPath(source,destination));
 		PathFinder pf =new PathFinder(roots);
 		Queue<String> root = pf.findPath(source,destination);
 		if(root !=null){
