@@ -38,7 +38,7 @@ public class PathFinder{
 			ArrayDeque<String> path = new ArrayDeque<String>();
 			path.add(source);
 			path.add(destination);
-			visited.clear();
+			visited.clear();		
 			return  path;
 		}
 		PathUtil util = new PathUtil(this,destination);  

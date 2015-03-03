@@ -1,6 +1,6 @@
 import java.util.*;
 public class Paths{
-	static Map<String,List<String>> roots = new HashMap<String,List<String>>();
+	static Map<String,List<String>> defoultRoots = new HashMap<String,List<String>>();
 	static {
 		List<String> bangalore = new ArrayList<String>();
 		bangalore.add("Singapore");
@@ -12,13 +12,13 @@ public class Paths{
 		List<String> beijing = new ArrayList<String>();
 		beijing.add("Tokyo");
 
-		roots.put("Bangalore",bangalore);
-		roots.put("Singapore",singapore);
-		roots.put("Seoul",seoul);
-		roots.put("Beijing",beijing);
+		defoultRoots.put("Bangalore",bangalore);
+		defoultRoots.put("Singapore",singapore);
+		defoultRoots.put("Seoul",seoul);
+		defoultRoots.put("Beijing",beijing);
 	}
 
-	public static boolean isPresent(String city){
+	public static boolean isPresent(String city,Map<String,List<String>> roots){
 		Set<String> keys =roots.keySet();
 		if(keys.contains(city)){
 			return true;
@@ -34,29 +34,37 @@ public class Paths{
 		return false;
 	}
 
-	public static boolean isPath(String source,String destination){ 
+	public static boolean isPath(String source,String destination,Map<String,List<String>> roots){ 
 		return roots.get(source).contains(destination);
 	}
 	public static void main(String a[]){
-		String source = a[0];
-		String destination = a[1];
-		if(!isPresent(source)){
-			System.out.println("No city named \""+source+"\" in database");
-			return;
-		}
-		if(!isPresent(destination)){
-			System.out.println("No city named \""+destination+"\" in database");
-			return;
-		}
-		PathFinder pf =new PathFinder(roots);
-		ArrayDeque<String> root = pf.findPath(source,destination);
-		if(root !=null){
-			pf.printPath(root);
-			return ;
-		}
-		root = pf.findPath(destination,source);
-		if(root!=null){
-			pf.printReversePath(root);
+			PathArgsMapper args;
+		try{
+			args = new PathArgsMapper(a);
+
+		
+			if(!isPresent(args.source,args.roots)){
+				System.out.println("No city named \""+args.source+"\" in database");
+				return;
+			}
+			if(!isPresent(args.destination,args.roots)){
+				System.out.println("No city named \""+args.destination+"\" in database");
+				return;
+			}
+			PathFinder pf =new PathFinder(args.roots);
+
+			ArrayDeque<String> root = pf.findPath(args.source,args.destination);
+			if(root !=null){
+				pf.printPath(root);
+				return ;
+			}
+			root = pf.findPath(args.destination,args.source);
+			if(root!=null){
+				pf.printReversePath(root);
+			}
+		}catch(Exception e){
+			System.out.println("No database named "+e.getMessage()+" found.");
+
 		}
 	}
 }
