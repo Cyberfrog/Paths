@@ -1,4 +1,5 @@
 import java.util.*;
+
 class PathUtil implements ListMapper<String,ArrayDeque<String>>,ListFilter<ArrayDeque<String>>{
 	PathFinder pf;
 	String destination;
@@ -16,10 +17,10 @@ class PathUtil implements ListMapper<String,ArrayDeque<String>>,ListFilter<Array
 		return queue != null;
 	}
 }
+
 public class PathFinder{
 	Map roots;
 	List<String> visited;
-	
 	public PathFinder(Map roots){
 		this.roots = roots;
 		visited = new ArrayList();
@@ -46,5 +47,23 @@ public class PathFinder{
 		firstPath = (ArrayDeque<String>)paths.get(0);
 		firstPath.addFirst(source);
 		return firstPath;
+	}
+
+	public void printPath(ArrayDeque<String> root){
+		String path=root.pollFirst();
+		String node;
+		while((node=root.pollFirst())!=null){
+			path =path+"->"+node;
+		}
+		System.out.println(path);
+	}
+
+	public void printReversePath(ArrayDeque<String> root){
+		String path=root.pollLast();
+		String node;
+		while((node=root.pollLast())!=null){
+			path =path+"->"+node;
+		}
+		System.out.println(path);
 	}
 }

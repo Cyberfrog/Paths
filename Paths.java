@@ -49,11 +49,14 @@ public class Paths{
 			return;
 		}
 		PathFinder pf =new PathFinder(roots);
-		Queue<String> root = pf.findPath(source,destination);
+		ArrayDeque<String> root = pf.findPath(source,destination);
 		if(root !=null){
-			for(String city: root){
-				System.out.print(city+"->");
-			}
+			pf.printPath(root);
+			return ;
+		}
+		root = pf.findPath(destination,source);
+		if(root!=null){
+			pf.printReversePath(root);
 		}
 	}
 }
