@@ -49,20 +49,22 @@ public class PathFinder{
 		return firstPath;
 	}
 
-	public void printPath(ArrayDeque<String> root){
+	public void printPath(ArrayDeque<String> root,CountryMapper map){
 		String path=root.pollFirst();
+		path = path+"["+map.getCountry(path)+"]";
 		String node;
 		while((node=root.pollFirst())!=null){
-			path =path+"->"+node;
+			path =path+"->"+node+"["+map.getCountry(node)+"]";
 		}
 		System.out.println(path);
 	}
 
-	public void printReversePath(ArrayDeque<String> root){
+	public void printReversePath(ArrayDeque<String> root,CountryMapper map){
 		String path=root.pollLast();
+		path = path+"["+map.getCountry(path)+"]";
 		String node;
 		while((node=root.pollLast())!=null){
-			path =path+"->"+node;
+			path =path+"->"+node+"["+map.getCountry(node)+"]";
 		}
 		System.out.println(path);
 	}

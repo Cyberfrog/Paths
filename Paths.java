@@ -41,8 +41,6 @@ public class Paths{
 			PathArgsMapper args;
 		try{
 			args = new PathArgsMapper(a);
-
-		
 			if(!isPresent(args.source,args.roots)){
 				System.out.println("No city named \""+args.source+"\" in database");
 				return;
@@ -55,12 +53,12 @@ public class Paths{
 
 			ArrayDeque<String> root = pf.findPath(args.source,args.destination);
 			if(root !=null){
-				pf.printPath(root);
+				pf.printPath(root,args.countrysMap);
 				return ;
 			}
 			root = pf.findPath(args.destination,args.source);
 			if(root!=null){
-				pf.printReversePath(root);
+				pf.printReversePath(root,args.countrysMap);
 			}
 		}catch(Exception e){
 			System.out.println("No database named "+e.getMessage()+" found.");
