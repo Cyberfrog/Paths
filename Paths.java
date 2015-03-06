@@ -51,16 +51,21 @@ public class Paths{
 			}
 			PathFinder pf =new PathFinder(args.roots);
 
-			ArrayDeque<String> root = pf.findPath(args.source,args.destination);
-			if(root !=null){
-				pf.printPath(root,args.countrysMap);
+			List<ArrayDeque<String>> allRoots = pf.findPath(args.source,args.destination);
+			if(allRoots.size()>0){
+				for(int i=0;i<allRoots.size();i++){
+					pf.printPath(allRoots.get(i),args.countrysMap,i);
+				}
 				return ;
 			}
-			root = pf.findPath(args.destination,args.source);
-			if(root!=null){
-				pf.printReversePath(root,args.countrysMap);
-			}
+			// allRoots = pf.findPath(args.destination,args.source);
+			// if(allRoots.size()>0){
+			// 	for(int i=0;i<allRoots.size();i++){
+			// 		pf.printReversePath(allRoots.get(i),args.countrysMap,i);
+			// 	}
+			// }
 		}catch(Exception e){
+			System.out.println(e);
 			System.out.println("No database named "+e.getMessage()+" found.");
 
 		}

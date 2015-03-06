@@ -15,6 +15,14 @@ public class PathReader{
 				dests.add(path[1]);				
 				roots.put(path[0],dests);
 			}
+			dests = roots.get(path[1]);
+			if(dests!=null){
+				dests.add(path[0]);
+			}else{
+				dests = new ArrayList<String>();
+				dests.add(path[0]);				
+				roots.put(path[1],dests);
+			}
 		}
 		return roots;
 	}
