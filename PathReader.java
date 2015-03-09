@@ -1,6 +1,7 @@
 import java.util.*;
 import java.io.*;
 public class PathReader{
+
 	public static Map<String,List<String>> readPath(String file) throws Exception{
 		Map<String,List<String>> roots = new HashMap<String,List<String>>();
 		BufferedReader in = new BufferedReader(new FileReader(file));

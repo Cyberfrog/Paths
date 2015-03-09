@@ -4,6 +4,7 @@ public class PathArgsMapper{
 	String source;
 	String destination;
 	CountryMapper countrysMap;
+	CostMapper costMap;
 	public PathArgsMapper(String a[]) throws Exception{
 		int optionIndex = Arrays.asList(a).indexOf("-f");
 		int cityOptionIndex = Arrays.asList(a).indexOf("-c");
@@ -14,8 +15,9 @@ public class PathArgsMapper{
 		if(optionIndex>=0){
 			String file=a[optionIndex+1];
 			try{			
-			roots = PathReader.readPath(file);}
-			catch(Exception e){
+			roots = PathReader.readPath(file);
+			costMap =new CostMapper(file);
+			}catch(Exception e){
 				throw new Exception(file);
 			}
 		}else{

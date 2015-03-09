@@ -15,8 +15,8 @@ class PathUtil implements ListMapper<String,List<ArrayDeque<String>>>,ListFilter
 		pf.visited.remove(source);
 		return paths;
 	}
-	public boolean check(List<ArrayDeque<String>> queue){
-		return queue != null;
+	public boolean check(List<ArrayDeque<String>> queueList){
+		return queueList != null && (!queueList.isEmpty());
 	}
 }
 
@@ -57,22 +57,15 @@ public class PathFinder{
 		return posiblePaths;
 	}
 	public void printPath(ArrayDeque<String> root,CountryMapper map,int index){
-		String path=root.pollFirst();
+		Iterator<String> i =root.iterator();
+		String path=i.next();
 		path = path+"["+map.getCountry(path)+"]";
 		String node;
-		while((node=root.pollFirst())!=null){
+		while(i.hasNext()){
+			node = i.next();
 			path =path+"->"+node+"["+map.getCountry(node)+"]";
 		}
 		System.out.println((++index)+"."+path);
 	}
 
-	public void printReversePath(ArrayDeque<String> root,CountryMapper map,int index){
-		String path=root.pollLast();
-		path = path+"["+map.getCountry(path)+"]";
-		String node;
-		while((node=root.pollLast())!=null){
-			path =path+"->"+node+"["+map.getCountry(node)+"]";
-		}
-		System.out.println((++index) +"."+path);
-	}
 }

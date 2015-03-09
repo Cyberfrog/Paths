@@ -54,7 +54,9 @@ public class Paths{
 			List<ArrayDeque<String>> allRoots = pf.findPath(args.source,args.destination);
 			if(allRoots.size()>0){
 				for(int i=0;i<allRoots.size();i++){
-					pf.printPath(allRoots.get(i),args.countrysMap,i);
+					ArrayDeque<String> path =allRoots.get(i);
+					pf.printPath(path,args.countrysMap,i);
+					System.out.println("Total :"+args.costMap.getCost(path));
 				}
 				return ;
 			}
